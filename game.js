@@ -11,7 +11,7 @@ BasicGame.Boot.prototype =
     preload: function () {
         game.plugins.add(new Phaser.Plugin.Isometric(game));
 
-        game.load.atlasJSONHash('tileset', 'assets/spritesheet.png', 'assets/sprites.json');
+        game.load.atlasJSONHash('tileset', 'assets/spritesheet-1.png', 'assets/sprites-1.json');
 
         game.physics.startSystem(Phaser.Plugin.Isometric.ISOARCADE);
     },
@@ -40,21 +40,20 @@ BasicGame.Boot.prototype =
             [5, 6, 5, 6, 5, 6, 5, 6],
             [6, 5, 6, 5, 6, 5, 6, 5],
             [5, 6, 5, 6, 5, 6, 5, 6],
-            [6, 5, 6, 9, 10, 5, 6, 5],
+            [6, 5, 6, 10, 10, 5, 6, 5],
             [5, 6, 5, 6, 5, 6, 5, 6],
             [6, 5, 6, 5, 6, 5, 6, 5],
-            [5, 6, 5, 6, 5, 6, 5, 6],
+            [5, 6, 5, 6, 5, 6, 10, 6],
             [6, 5, 6, 5, 6, 5, 6, 5],
         ];
 
-        var size = 32;//16
+        var size = 16;
         for (var x = 0; x < tiles.length ; x++) {
             for (var y = 0; y < tiles[x].length ; y++) {
-              if (tileArray[tiles[x][y]]===10){
-                game.add.isoSprite(x*size, y*size, 50, 'tileset', tileArray[tiles[x][y]], isoGroup);
-              } else {
-                game.add.isoSprite(x*size, y*size, 0, 'tileset', tileArray[tiles[x][y]], isoGroup);
-              }
+              tile = game.add.isoSprite(x*size, y*size, 0, 'tileset', tileArray[tiles[x][y]], isoGroup);
+              tile.anchor.set(0.5, 1);
+              tile.smoothed = false;
+              tile.body.moves = false;
             }
         }
     }
